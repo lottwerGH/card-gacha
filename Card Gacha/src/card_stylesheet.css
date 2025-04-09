@@ -1,0 +1,273 @@
+:root {
+    --btn-border: 1px solid rgba(255, 255, 255, 0.2);
+    --btn-bg: transparent;
+    --btn-shadow: 1px 1px 25px 10px rgba(255, 255, 255, 0.5);
+    --btn-text-color: #f4f4f4;
+
+    --shine-degree: 120deg;
+    --shine-color: rgba(255, 255, 255, 0.2);
+    --shine-effect: linear-gradient(
+        var(--shine-degree),
+        transparent,
+        var(--shine-color),
+        transparent
+    );
+
+    --common-color: #444;
+    --uncommon-color: #2a6e2a;
+    --rare-color: linear-gradient(135deg, #3a5cbb, #6b89ff);
+    --epic-color: linear-gradient(135deg, #8a2be2, #b16eff);
+    --legendary-color: linear-gradient(135deg, #e0c14d, #d6b74a);
+    --mythic-color: linear-gradient(135deg, #b10606, #ff3c3c);
+    --celestial-color: linear-gradient(135deg, #8F87F1, #C68EFD, #E9A5F1, #FED2E2);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: beige;
+    font-family: Arial, sans-serif;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    z-index: 1;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 200px;
+    height: 350px;
+    background: var(--card-bg, #444);
+    border: 3px solid #000;
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -90%;
+    width: 50%;
+    height: 100%;
+    background: var(--shine-effect);
+    transform: skewX(-20deg);
+}
+
+.card.rare {
+    --glow-color: #3a5cbb;
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.2), 0 0 20px 6px var(--glow-color);
+}
+
+.card.epic {
+    --glow-color: #8a2be2;
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.2), 0 0 20px 6px var(--glow-color);
+}
+
+.card.legendary {
+    --glow-color: #d4af37;
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.2), 0 0 25 10px var(--glow-color);
+}
+
+.card.mythic {
+    --glow-color: #b10606;
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.2), 0 0 30px 15px var(--glow-color);
+}
+
+.card.celestial {
+    --glow-color: #C68EFD;
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.2), 0 0 50px 20px var(--glow-color);
+}
+
+.card.epic::before,
+.card.legendary::before,
+.card.mythic::before {
+    animation: shine 5s ease-in-out infinite;
+}
+
+@keyframes shine {
+    0% { left: -90%; }
+    22% { left: 150%; }
+    100% { left: 150%; }
+}
+
+.card.common { --card-bg: var(--common-color); }
+.card.uncommon { --card-bg: var(--uncommon-color); }
+.card.rare { --card-bg: var(--rare-color); --shine-color: rgba(100, 180, 255, 0.3); }
+.card.epic { --card-bg: var(--epic-color); --shine-color: rgba(200, 100, 255, 0.4); }
+.card.legendary { --card-bg: var(--legendary-color); --shine-color: rgba(255, 215, 0, 0.5); }
+.card.mythic { --card-bg: var(--mythic-color); --shine-color: rgba(255, 50, 50, 0.5); }
+.card.celestial { --card-bg: var(--celestial-color); --shine-color: rgba(216, 126, 252, 0.575);}
+
+
+.card-title {
+    padding: 10px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    border-bottom: 2px solid #000;
+}
+
+.card-middle {
+    position: relative;
+    text-align: center;
+    padding: 12px;
+    font-size: 45px;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 1px;
+    overflow: hidden;
+    text-wrap: balance;
+}
+
+.star-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px;
+    border-top: 2px solid #000;
+}
+
+.star-img-container {
+    width: 28px;
+    height: 28px;
+    filter: drop-shadow(1px 1px 1px black);
+}
+
+.star-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Optional image support */
+.card-image {
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 2px solid #000;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+#pull-button {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    font-size: 18px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    transition: background-color 0.2s;
+}
+
+#pull-button:hover {
+    background-color: #555;
+}
+
+
+.card.hidden {
+    opacity: 0;
+    transform: scale(0.5) rotate(-5deg);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.card.revealed {
+    pointer-events: none;
+    animation: cardReveal 0.6s ease-out forwards;
+}
+
+.card.legendary.revealed,
+.card.mythic.revealed,
+.card.celestial.revealed {
+    pointer-events: none;
+    animation: rareCardReveal 1.6s ease-out forwards;
+}
+
+@keyframes cardReveal {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) rotateY(90deg);
+    }
+    50% {
+        transform: scale(1.1) rotateY(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes rareCardReveal {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) rotateY(0deg);
+    }
+    25% {
+        opacity: 1;
+        transform: scale(0.8) rotateY(360deg);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.2) rotateY(540deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotateY(720deg);
+    }
+}
+
+
+.star-hidden {
+    opacity: 0;
+    transform: scale(0.5) rotate(-30deg);
+}
+
+.star-reveal {
+    animation: starAppear 0.3s ease forwards;
+}
+
+@keyframes starAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) rotate(-30deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2) rotate(10deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
